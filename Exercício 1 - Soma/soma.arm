@@ -1,0 +1,16 @@
+; Maioria dos compilers
+soma:
+  ADD r0, r0, r1, ASR #1 ; R0 vai receber (int)x + ((int)y >> 1)
+  MOV r0, r0, LSL #16
+  MOV r0, r0, ASR #16 ; R0 vai receber (short)r0
+  MOV pc, r14 ; retorne o valor de r0
+  
+ ; GCC
+ somaGCC:
+  MOV r0, r0, LSL #16
+  MOV r1, r1, LSL #16
+  MOV r1, r1, ASR #17       ; r1 recebera (int)y >> 1
+  ADD r1, r1, r0, ASR #16   ; r1 += (int)x
+  MOV r1, r1, LSL #16
+  MOV r0, r1, ASR #16       ; r0 recebera (short)r1
+  MOV pc, lr                ; retorne o valor de r0
