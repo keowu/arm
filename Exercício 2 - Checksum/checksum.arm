@@ -1,0 +1,14 @@
+checksum_Main:
+  MOV r2, #0             ; move para CHK o valor 0
+  CMP r1, #0             ; compara n com zero
+  BEQ checksum_final     ; Se o n == 0 salte ao final
+  
+checksum_Looping:
+  LDR r3, [r0], #4       ; r3 = *(dados++)
+  SUBS r1, r1, #1        ; N-- e seta a flag
+  ADD r2, r3, r2         ; chk += r3
+  BNE checksum_Looping   ; Se o n != 0 volte a repetir
+
+checksum_final:
+  MOV r0, r2             ; r0 = chk
+  MOV pc, r14            ; retorne o valor de r0 ou seja nosso chk
